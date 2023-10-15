@@ -1,0 +1,33 @@
+version: '1'
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    depends_on:
+      - fpm
+    volumes:
+      - ./:/var/www/laravel
+  fpm: 
+    build: 
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/var/www/laravel
+    working_dir: /var/www/laravel
+    depends_on:
+      - postgresql
+  postgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: order_dealer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      

@@ -1,0 +1,562 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "orderDealer API 1.0",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://127.0.0.1:8080/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "orders",
+      "description": "Orders route"
+    },
+    {
+      "name": "banks",
+      "description": "Banks route"
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Orders list",
+        "description": "Load orders list",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "description": "count items on page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "number page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Create order",
+        "description": "Create new order",
+        "operationId": "orders",
+        "requestBody": {
+          "description": "Create order",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Orders by id",
+        "description": "Load orders by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "order id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Update order",
+        "description": "Update order by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "order id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "ordersUpdate",
+        "requestBody": {
+          "description": "Update order",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCreate"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Update order",
+        "description": "Update order by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "order id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "ordersDelete",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/banks": {
+      "get": {
+        "tags": [
+          "banks"
+        ],
+        "summary": "Banks list",
+        "description": "Load banks list",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "description": "count items on page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "number page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bank"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "banks"
+        ],
+        "summary": "Create bank",
+        "description": "Create new bank",
+        "operationId": "banks",
+        "requestBody": {
+          "description": "Create bank",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bank"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/banks/{id}": {
+      "get": {
+        "tags": [
+          "banks"
+        ],
+        "summary": "Banks by id",
+        "description": "Load banks by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "bank id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bank"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "banks"
+        ],
+        "summary": "Update bank",
+        "description": "Update bank by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "bank id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "banksUpdate",
+        "requestBody": {
+          "description": "Update bank",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankCreate"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bank"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "banks"
+        ],
+        "summary": "Update bank",
+        "description": "Update bank by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "bank id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "ordersDelete",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "dealer_name": {
+            "type": "string",
+            "example": "Китайский дилер"
+          },
+          "employee_name": {
+            "type": "string",
+            "example": "Михал Михалыч"
+          },
+          "amount": {
+            "type": "integer",
+            "example": 2500000
+          },
+          "time": {
+            "type": "integer",
+            "example": 40
+          },
+          "interest_rate": {
+            "type": "string",
+            "example": 81.7
+          },
+          "reason": {
+            "type": "string",
+            "example": "Кредит на китайский автомобиль"
+          },
+          "status": {
+            "type": "string",
+            "example": "NEW"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "15-10-2023"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "15-10-2023"
+          }
+        }
+      },
+      "OrderCreate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "dealer_name": {
+            "type": "string",
+            "example": "Китайский дилер"
+          },
+          "employee_name": {
+            "type": "string",
+            "example": "Михал Михалыч"
+          },
+          "amount": {
+            "type": "integer",
+            "example": 2500000
+          },
+          "time": {
+            "type": "integer",
+            "description": "credit term",
+            "example": 40
+          },
+          "bank_id": {
+            "type": "integer",
+            "description": "Bank id",
+            "example": 1
+          },
+          "reason": {
+            "type": "string",
+            "example": "Кредит на китайский автомобиль"
+          },
+          "status": {
+            "type": "string",
+            "description": "order status (NEW, PROGRESS, APPROVED, REJECTED)",
+            "example": "NEW"
+          }
+        }
+      },
+      "Bank": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Сбер"
+          },
+          "interest_rate": {
+            "type": "string",
+            "example": 81.7
+          }
+        }
+      },
+      "BankCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Сбер"
+          },
+          "interest_rate": {
+            "type": "string",
+            "example": 81.7
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Order": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          }
+        }
+      },
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
