@@ -27,3 +27,5 @@ php artisan migrate:refresh --seed
 
 
 Документация к API, доступна по аддресу  - http://127.0.0.1:8080/api/documentation
+
+В таблице orders, колонна status - имеет следующие значения (NEW, PROGRESS, APPROVED, REJECTED)
